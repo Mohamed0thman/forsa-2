@@ -15,7 +15,10 @@ const Header = ({ style, isRtl }: Props) => {
     <Row isRtl={isRtl} justifyContent="space-between" style={[style]}>
       <IconButtons icon={<SearchIcon />} />
 
-      <IconButtons icon={<ForsaLogoIcon />} />
+      <IconButtons
+        style={{ alignSelf: "center", width: "33.333%" }}
+        icon={<ForsaLogoIcon />}
+      />
 
       <Row gap={10} isRtl={isRtl}>
         <IconButtons icon={<HeartIcon />} />

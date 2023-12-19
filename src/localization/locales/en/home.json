@@ -1,3 +1,17 @@
 {
-  "welconm": "الرئيسية"
+  "title": {
+    "selectors": "Top brands in retail",
+    "service": "Request Additional Loan",
+    "offer": "Offers Select for You "
+  },
+  "subTitle": {
+    "seeLess": "See Less",
+    "seeAll": "See All",
+    "viewAll": "View all"
+  },
+  "sign": {
+    "title": "Get your limit",
+    "subTitle": "Complete your infoand get up to EGP 100,000"
+  },
+  "offerTitle": "Check out latest offers"
 }

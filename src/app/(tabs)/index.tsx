@@ -9,9 +9,10 @@ import {
   SelectorList,
   ServiceList,
 } from "../../components/home";
-import { Carousel, Row, Typography } from "../../components/ui";
+import { Row, Typography } from "../../components/ui";
 import images from "../../constants/images";
 import { RootScreen } from "../../components";
+import { useTranslation } from "react-i18next";
 
 const { SC_Width, s, vs, mvs, ms } = SCALE;
 const { WritingIcon } = ICONS;
@@ -24,6 +25,8 @@ export default function Home() {
   const offerListRef = React.useRef<any>(null);
 
   const { isRtl } = useAppSelector((state) => state.setting);
+
+  const { t } = useTranslation();
 
   const onRefresh = React.useCallback(async () => {
     setRefreshing(true);
@@ -74,58 +77,40 @@ export default function Home() {
               isRtl={isRtl}
               style={styles.signTitle}
             >
-              Get your limit
+              {t("home:sign.title")}
             </Typography>
             <Typography
               fontWeight="Regular"
               isRtl={isRtl}
               style={styles.signSubtitle}
             >
-              Complete your infoand get up to EGP 100,000
+              {t("home:sign.subTitle")}
             </Typography>
           </View>
         </Row>
       </View>
 
-      <Carousel
-        data={[1, 2, 3]}
-        carouselItem={() => {
-          return (
-            <View
-              style={{
-                width: s(325),
-                height: vs(130),
-                overflow: "hidden",
-                justifyContent: "center",
-                alignItems: "center",
-                borderRadius: 22,
-              }}
-            >
-              <Image
-                source={images.offerImage}
-                style={{
-                  position: "absolute",
-                  top: 0,
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  zIndex: -1,
-                  borderRadius: 22,
-                }}
-                contentFit="cover"
-              />
-              <Typography
-                fontWeight="Bold"
-                color={COLORS.white}
-                style={{ ...FONTS.h4 }}
-              >
-                Check out latest offers
-              </Typography>
-            </View>
-          );
-        }}
-        style={{ marginVertical: vs(SIZES.base) }}
-      />
+      <View style={styles.imageContainer}>
+        <Image
+          source={images.offerImage}
+          style={styles.image}
+          contentFit="cover"
+        />
+        <Row isRtl={isRtl} gap={10}>
+          <Image
+            source={images.offerBrand}
+            style={{ width: s(70), height: vs(70) }}
+            contentFit="contain"
+          />
+          <Typography
+            fontWeight="Bold"
+            color={COLORS.primary}
+            style={{ ...FONTS.h4 }}
+          >
+            {t("home:offerTitle")}
+          </Typography>
+        </Row>
+      </View>
 
       <FlatList
         ref={flatListRef}
@@ -151,6 +136,24 @@ const styles = StyleSheet.create({
   container: {
     // paddingTop: SIZES.margin,
   },
+  imageContainer: {
+    width: "90%",
+    height: vs(130),
+    overflow: "hidden",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 22,
+    alignSelf: "center",
+    marginTop: mvs(SIZES.base),
+  },
+  image: {
+    position: "absolute",
+    top: 0,
+    width: "100%",
+    height: "100%",
+    zIndex: -1,
+  },
+  imageTitle: {},
   sign: {
     width: "100%",
     borderWidth: 1,

@@ -12,6 +12,7 @@ import { COLORS, IMAGES, SCALE, FONTS } from "../../constants";
 import { useAppDispatch, useAppSelector } from "../../store/configureStore";
 import { getSelectors } from "../../store/slices/selectorsSlice";
 import { getBrands, getMoreBrands } from "../../store/slices/brandSlice";
+import { useTranslation } from "react-i18next";
 const { s, vs, mvs, ms } = SCALE;
 
 type Props = {};
@@ -22,6 +23,8 @@ const SelectorList = forwardRef<any, Props>(({}, ref) => {
 
   const selectorListRef = React.useRef<FlatList>(null);
   const brandListRef = React.useRef<FlatList>(null);
+
+  const { t } = useTranslation();
 
   const { selectors, isLoading: selectorLoading } = useAppSelector(
     (state) => state.selector
@@ -176,10 +179,10 @@ const SelectorList = forwardRef<any, Props>(({}, ref) => {
     <View style={styles.container}>
       <Row isRtl={isRtl} justifyContent="space-between" style={styles.header}>
         <Typography style={styles.headerTitle} fontWeight="Bold">
-          Top brands in retail
+          {t("home:title.selectors")}
         </Typography>
         <Pressable android_ripple={{ borderless: false, radius: 50 }}>
-          <Typography>View all</Typography>
+          <Typography> {t("home:subTitle.viewAll")}</Typography>
         </Pressable>
       </Row>
       <FlatList
@@ -192,6 +195,7 @@ const SelectorList = forwardRef<any, Props>(({}, ref) => {
         keyExtractor={(item, i) => `${i}`}
         renderItem={selectorLoading ? renderLoadingSelector : renderItem}
         ItemSeparatorComponent={() => <View style={{ width: s(10) }} />}
+        inverted={isRtl}
       />
 
       <FlatList
@@ -239,6 +243,7 @@ const SelectorList = forwardRef<any, Props>(({}, ref) => {
           offset: (s(100) + s(20)) * index, //  ( WIDTH + (MARGIN_HORIZONTAL*2) ) * (index)
           index,
         })}
+        inverted={isRtl}
       />
     </View>
   );

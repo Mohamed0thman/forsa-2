@@ -5,6 +5,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useAppDispatch, useAppSelector } from "../../store/configureStore";
 import { getServices } from "../../store/slices/serviceSlice";
 import { COLORS, FONTS, SCALE } from "../../constants";
+import { useTranslation } from "react-i18next";
 
 const { s, mvs } = SCALE;
 
@@ -22,6 +23,7 @@ const ServiceList = forwardRef<any, Props>(({}, ref) => {
 
   const { services, isLoading } = useAppSelector((state) => state.service);
   const { isRtl } = useAppSelector((state) => state.setting);
+  const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
 
@@ -62,10 +64,10 @@ const ServiceList = forwardRef<any, Props>(({}, ref) => {
             style={styles.header}
           >
             <Typography style={styles.headerTitle} fontWeight="Bold">
-              Request Additional Loan
+              {t("home:title.service")}
             </Typography>
             <Pressable android_ripple={{ borderless: false, radius: 50 }}>
-              <Typography>See All</Typography>
+              <Typography> {t("home:subTitle.seeLess")}</Typography>
             </Pressable>
           </Row>
         }
@@ -91,8 +93,8 @@ const ServiceList = forwardRef<any, Props>(({}, ref) => {
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
             >
-              <Typography style={styles.serviceText}>
-                {item?.name_en}
+              <Typography isRtl={isRtl} style={styles.serviceText}>
+                {isRtl ? item?.name_ar : item?.name_en}
               </Typography>
             </LinearGradient>
           );

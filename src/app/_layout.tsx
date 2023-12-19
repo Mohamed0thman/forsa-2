@@ -1,5 +1,6 @@
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
 import { Slot } from "expo-router";
-import { StatusBar } from "expo-status-bar";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
@@ -33,16 +34,18 @@ export default function RootLayout() {
   }
 
   return (
-    <SafeAreaProvider>
-      <Provider store={store}>
-        <PersistGate
-          loading={null}
-          persistor={persistor}
-          onBeforeLift={onBeforeLift}
-        >
-          <Slot />
-        </PersistGate>
-      </Provider>
-    </SafeAreaProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <Provider store={store}>
+          <PersistGate
+            loading={null}
+            persistor={persistor}
+            onBeforeLift={onBeforeLift}
+          >
+            <Slot />
+          </PersistGate>
+        </Provider>
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }

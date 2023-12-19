@@ -3,8 +3,18 @@ import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../../store/configureStore";
 import { COLORS, ICONS, FONTS, SCALE } from "../../constants";
 import { Typography } from "../../components/ui";
+import { StyleSheet } from "react-native";
 
-const { HomeIcon, DiscountIcon, TagIcon, UserIcon } = ICONS;
+const {
+  HomeIcon,
+  DiscountIcon,
+  TagIcon,
+  UserIcon,
+  HomeIconSolid,
+  DiscountIconSolid,
+  ProfileIconSolid,
+  TagIconSolid,
+} = ICONS;
 const { SC_Width, s, vs, mvs, ms } = SCALE;
 
 export default function TabsLayout() {
@@ -25,22 +35,22 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          tabBarIcon: ({ focused }) => (
-            <HomeIcon
-              fill={focused ? COLORS.primary : "none"}
-              stroke={focused ? "none" : COLORS.lightGrey}
-              width={s(22)}
-              height={vs(22)}
-            />
-          ),
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <HomeIconSolid width={s(22)} height={vs(22)} />
+            ) : (
+              <HomeIcon width={s(22)} height={vs(22)} />
+            ),
           tabBarLabel: ({ focused }) => (
             <Typography
               fontWeight={focused ? "Bold" : "Regular"}
-              style={{
-                ...FONTS.small,
-                color: focused ? COLORS.primary : COLORS.lightGrey,
-                transform: [{ scaleX: isRtl ? -1 : 1 }],
-              }}
+              style={[
+                styles.label,
+                {
+                  color: focused ? COLORS.primary : COLORS.lightGrey,
+                  transform: [{ scaleX: isRtl ? -1 : 1 }],
+                },
+              ]}
             >
               {t("main:tabs.home")}
             </Typography>
@@ -50,22 +60,22 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="retail"
         options={{
-          tabBarIcon: ({ focused }) => (
-            <TagIcon
-              fill={focused ? COLORS.primary : "none"}
-              stroke={focused ? "none" : COLORS.lightGrey}
-              width={s(22)}
-              height={vs(22)}
-            />
-          ),
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <TagIconSolid width={s(22)} height={vs(22)} />
+            ) : (
+              <TagIcon width={s(22)} height={vs(22)} />
+            ),
           tabBarLabel: ({ focused }) => (
             <Typography
               fontWeight={focused ? "Bold" : "Regular"}
-              style={{
-                ...FONTS.small,
-                color: focused ? COLORS.primary : COLORS.lightGrey,
-                transform: [{ scaleX: isRtl ? -1 : 1 }],
-              }}
+              style={[
+                styles.label,
+                {
+                  color: focused ? COLORS.primary : COLORS.lightGrey,
+                  transform: [{ scaleX: isRtl ? -1 : 1 }],
+                },
+              ]}
             >
               {t("main:tabs.retail")}
             </Typography>
@@ -75,22 +85,22 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="offers"
         options={{
-          tabBarIcon: ({ focused }) => (
-            <DiscountIcon
-              fill={focused ? COLORS.primary : "none"}
-              stroke={focused ? "none" : COLORS.lightGrey}
-              width={s(22)}
-              height={vs(22)}
-            />
-          ),
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <DiscountIconSolid width={s(22)} height={vs(22)} />
+            ) : (
+              <DiscountIcon width={s(22)} height={vs(22)} />
+            ),
           tabBarLabel: ({ focused }) => (
             <Typography
               fontWeight={focused ? "Bold" : "Regular"}
-              style={{
-                ...FONTS.small,
-                color: focused ? COLORS.primary : COLORS.lightGrey,
-                transform: [{ scaleX: isRtl ? -1 : 1 }],
-              }}
+              style={[
+                styles.label,
+                {
+                  color: focused ? COLORS.primary : COLORS.lightGrey,
+                  transform: [{ scaleX: isRtl ? -1 : 1 }],
+                },
+              ]}
             >
               {t("main:tabs.offers")}
             </Typography>
@@ -100,22 +110,22 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="account"
         options={{
-          tabBarIcon: ({ focused }) => (
-            <UserIcon
-              fill={focused ? COLORS.primary : "none"}
-              stroke={focused ? "none" : COLORS.lightGrey}
-              width={s(22)}
-              height={vs(22)}
-            />
-          ),
+          tabBarIcon: ({ focused }) =>
+            focused ? (
+              <ProfileIconSolid width={s(22)} height={vs(22)} />
+            ) : (
+              <UserIcon width={s(22)} height={vs(22)} />
+            ),
           tabBarLabel: ({ focused }) => (
             <Typography
               fontWeight={focused ? "Bold" : "Regular"}
-              style={{
-                ...FONTS.small,
-                color: focused ? COLORS.primary : COLORS.lightGrey,
-                transform: [{ scaleX: isRtl ? -1 : 1 }],
-              }}
+              style={[
+                styles.label,
+                {
+                  color: focused ? COLORS.primary : COLORS.lightGrey,
+                  transform: [{ scaleX: isRtl ? -1 : 1 }],
+                },
+              ]}
             >
               {t("main:tabs.profile")}
             </Typography>
@@ -125,3 +135,9 @@ export default function TabsLayout() {
     </Tabs>
   );
 }
+const styles = StyleSheet.create({
+  label: {
+    ...FONTS.small,
+    marginBottom: mvs(10),
+  },
+});

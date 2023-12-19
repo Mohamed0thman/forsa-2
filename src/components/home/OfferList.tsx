@@ -5,6 +5,7 @@ import dayjs from "dayjs";
 import { COLORS, SCALE, FONTS } from "../../constants";
 import { useAppDispatch, useAppSelector } from "../../store/configureStore";
 import { getOffers } from "../../store/slices/offerSlice";
+import { useTranslation } from "react-i18next";
 
 const { s, mvs } = SCALE;
 
@@ -15,6 +16,7 @@ const OfferList = forwardRef<any, Props>(({}, ref) => {
 
   const { offers, isLoading } = useAppSelector((state) => state.offer);
   const { isRtl } = useAppSelector((state) => state.setting);
+  const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
 
@@ -34,7 +36,6 @@ const OfferList = forwardRef<any, Props>(({}, ref) => {
     []
   );
 
-  console.log("offers", offers);
 
   return (
     <FlatList
@@ -51,10 +52,10 @@ const OfferList = forwardRef<any, Props>(({}, ref) => {
       ListHeaderComponent={
         <Row isRtl={isRtl} justifyContent="space-between" style={styles.header}>
           <Typography style={styles.headerTitle} fontWeight="Bold">
-            Offers Select for You
+            {t("home:title.offer")}
           </Typography>
           <Pressable android_ripple={{ borderless: false, radius: 50 }}>
-            <Typography>See All</Typography>
+            <Typography> {t("home:subTitle.seeAll")}</Typography>
           </Pressable>
         </Row>
       }
